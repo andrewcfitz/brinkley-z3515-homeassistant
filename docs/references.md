@@ -50,3 +50,17 @@ Links worth keeping. Add as you find them.
 
 - coachproxy / RV-C open-source projects: RV-C decoding prior art (to be
   catalogued).
+
+## To review (reading list)
+
+Saved to read later; not yet vetted. Descriptions are from titles only.
+
+- [manos/OneControl-RV-C-Protocol](https://github.com/manos/OneControl-RV-C-Protocol/tree/main/rvc):
+  reverse-engineered OneControl RV-C protocol notes/data. Most directly relevant
+  to the decode phase.
+- [spbrogan/rvc2mqtt](https://github.com/spbrogan/rvc2mqtt/): RV-C to MQTT bridge.
+  Possible off-the-shelf path from the CAN bus to HA via the planned MQTT broker.
+- [rperciaccante/HADynamicWeather](https://github.com/rperciaccante/HADynamicWeather):
+  Home Assistant project (relevance to be confirmed).
+- [Interfacing with the OneControl system via CAN bus](https://www.gdrvowners.com/forum/operation/appliances/45716-interfacing-with-the-onecontrol-system-via-canbus)
+  (Grand Design RV owners forum). Owner discussion of tapping OneControl over CAN.
