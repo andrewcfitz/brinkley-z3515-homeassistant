@@ -4,6 +4,22 @@ Dated, append-only notes on reverse-engineering the Z3515. Newest entries on
 top. Dead ends are kept on purpose: a failed approach and the reason it failed
 is as useful as a success.
 
+## 2026-06-29: First integration confirmed (Hughes Power Watchdog)
+
+Shore-power monitoring is **working in Home Assistant**. The Hughes Autoformers
+Power Watchdog Gen II WiFi 30A surge protector is integrated via the
+[`jdaleo23/ha-power-watchdog`](https://github.com/jdaleo23/ha-power-watchdog)
+HACS custom integration over BLE. Exposes voltage, current, power, energy,
+frequency, error code/description, and a fault binary sensor. First `Confirmed`
+row in the status table.
+
+Notes for the build:
+
+- Device allows only one BLE connection at a time; the phone app must be closed
+  for HA to connect.
+- BLE range is marginal. Plan to add a **separate** ESP32 ESPHome Bluetooth
+  proxy (the CAN-bridge ESP32 stays dedicated to bus duty).
+
 ## 2026-06-29: Hardware plan locked in (LCI OneControl over CAN)
 
 Identified the coach control system as **Lippert (LCI) OneControl**, which runs

@@ -4,7 +4,30 @@ How Home Assistant talks to the Z3515. This is the "what works" half of the
 repo. Update the README status table whenever an entry here moves to
 `Confirmed`.
 
-## Integration method
+This rig has more than one integration. Each is tracked separately below.
+
+## Shore power: Hughes Power Watchdog (working)
+
+**Status: Confirmed.** A **Hughes Autoformers Power Watchdog Gen II WiFi 30A**
+smart surge protector monitors incoming shore power. It is integrated into Home
+Assistant with the [`jdaleo23/ha-power-watchdog`](https://github.com/jdaleo23/ha-power-watchdog)
+custom integration.
+
+- **Transport:** Bluetooth Low Energy (BLE). Local, real-time notifications, no
+  cloud or polling.
+- **Install:** via HACS (add the repo as a custom repository, install "Hughes
+  Power Watchdog," restart HA).
+- **Entities (30A, single line):** voltage (V), current (A), power (W), energy
+  (kWh), frequency (Hz), error code, error description, and a `Fault Active`
+  binary sensor for automations.
+- **Gotchas:**
+  - The device allows only **one BLE connection at a time**. Close the official
+    Power Watchdog phone app or HA cannot connect.
+  - BLE range is short. An **ESPHome Bluetooth proxy** is recommended for a
+    stable link. Note: the OneControl CAN ESP32 is busy with bus duty, so a
+    separate cheap ESP32 BT proxy is the cleaner option.
+
+## Coach systems: OneControl CAN bus via ESP32 bridge (in progress)
 
 **Chosen approach: tap the OneControl CAN bus with an ESP32 bridge.**
 
@@ -36,13 +59,33 @@ here.
 
 ## Home Assistant entities
 
-| Entity ID | Type | Subsystem | Source | Status |
-|-----------|------|-----------|--------|--------|
-|           |      |           |        |        |
+Power Watchdog entities are provided by the `ha-power-watchdog` integration.
+Exact entity IDs depend on your HA naming; types and subsystem are fixed.
+
+| Entity | Type | Subsystem | Source | Status |
+|--------|------|-----------|--------|--------|
+| Voltage | sensor (V) | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Current | sensor (A) | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Power | sensor (W) | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Energy | sensor (kWh) | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Frequency | sensor (Hz) | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Error code / description | sensor | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Fault Active | binary_sensor | Shore power | ha-power-watchdog (BLE) | Confirmed |
 
 ## Setup
 
-Step-by-step to reproduce a working setup. Empty until there is one to
-describe.
+### Hughes Power Watchdog (BLE)
 
-> _Steps go here._
+1. Ensure HA has a working Bluetooth adapter or an ESPHome Bluetooth proxy in
+   range of the surge protector.
+2. Install HACS if not already present.
+3. In HACS, add `https://github.com/jdaleo23/ha-power-watchdog` as a custom
+   repository (type: Integration), then install "Hughes Power Watchdog."
+4. Restart Home Assistant.
+5. Close the official Power Watchdog phone app so the BLE connection is free.
+6. Add the integration; it auto-detects the model and creates the sensors above.
+
+### OneControl CAN bridge
+
+Empty until there is a working bridge to describe. See the
+[discovery log](discovery-log.md) for progress.

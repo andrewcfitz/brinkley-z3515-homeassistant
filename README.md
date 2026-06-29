@@ -26,17 +26,18 @@ Tracking how far each subsystem has gotten toward Home Assistant integration.
 
 | Subsystem            | Status      | Notes |
 |----------------------|-------------|-------|
-| Fresh water tank     | Unknown     |       |
-| Grey water tank      | Unknown     |       |
-| Black water tank     | Unknown     |       |
-| Lighting             | Unknown     |       |
-| Climate / HVAC       | Unknown     |       |
-| Water heater         | Unknown     |       |
-| Awning               | Unknown     |       |
-| Slides               | Unknown     |       |
-| Leveling / jacks     | Unknown     |       |
-| Battery / power      | Unknown     |       |
-| Generator            | Unknown     |       |
+| Shore power monitor  | Confirmed   | Hughes Power Watchdog Gen II 30A over BLE (`ha-power-watchdog`) |
+| Fresh water tank     | Unknown     | Target via OneControl CAN bridge |
+| Grey water tank      | Unknown     | Target via OneControl CAN bridge |
+| Black water tank     | Unknown     | Target via OneControl CAN bridge |
+| Lighting             | Unknown     | Target via OneControl CAN bridge |
+| Climate / HVAC       | Unknown     | Target via OneControl CAN bridge |
+| Water heater         | Unknown     | Target via OneControl CAN bridge |
+| Awning               | Unknown     | Target via OneControl CAN bridge |
+| Slides               | Unknown     | Target via OneControl CAN bridge |
+| Leveling / jacks     | Unknown     | Target via OneControl CAN bridge |
+| Battery / power      | Unknown     | Target via OneControl CAN bridge |
+| Generator            | Unknown     | Target via OneControl CAN bridge |
 
 **Legend:** `Confirmed` working in HA · `In progress` partially working or under
 investigation · `Unknown` not yet started.

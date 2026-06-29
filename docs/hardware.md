@@ -57,15 +57,19 @@ Hardware bought to build the Home Assistant bridge.
 | CAN bus cable | Connect ESP32 node into the OneControl CAN daisy chain | Molex **2451350220** (Mini-Fit Jr, 2 m) | Same cable used in the forum build. Lippert equivalents: #331111 (2 ft), #331114 (10 ft). |
 | Power connector (housing) | 12 V power tap for the node | TE / AMP Mate-N-Lok **1-480318-0** | |
 | Power connector pins | Crimp sockets for the power connector | TE **60619-4** | |
+| Hughes Power Watchdog Gen II WiFi 30A | Shore-power surge protection + monitoring (already integrated into HA) | Hughes Autoformers Power Watchdog Gen II 30A | Talks to HA over BLE via the `ha-power-watchdog` integration. See [integration](integration.md). |
 
 ### Still to buy or confirm
 
-- **CAN terminating resistor** — Lippert p/n **333041** (about $9). Needed if the
+- **CAN terminating resistor:** Lippert p/n **333041** (about $9). Needed if the
   ESP32 is inserted at the end of the chain. First confirm whether the Waveshare
   board has a switchable 120 ohm terminator on-board; if it does, that may cover
   it.
-- **Power wire** — the forum build used 16/2 AWG tinned marine duplex, spliced
+- **Power wire:** the forum build used 16/2 AWG tinned marine duplex, spliced
   into the touchscreen's 12 V feed.
+- **Bluetooth proxy (likely):** a separate cheap ESP32 running ESPHome as a BT
+  proxy, to give the Power Watchdog a stable BLE link to HA. The CAN-bridge
+  ESP32 is occupied with bus duty, so keep these as separate devices.
 
 ## Model and reference numbers
 
