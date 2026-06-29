@@ -12,6 +12,14 @@ log of what is still being reverse-engineered.
 > coordinates, or network credentials. See `.gitignore` and
 > `homeassistant/README.md`.
 
+## Approach
+
+The Z3515 runs **Lippert (LCI) OneControl**, an **RV-C over CAN** system. The
+plan is to tap the CAN bus with a **Waveshare ESP32-S3 RS485/CAN** board and
+bridge decoded values to Home Assistant over WiFi. Details in
+[`docs/integration.md`](docs/integration.md) and [`docs/hardware.md`](docs/hardware.md);
+running notes in [`docs/discovery-log.md`](docs/discovery-log.md).
+
 ## Status at a glance
 
 Tracking how far each subsystem has gotten toward Home Assistant integration.
@@ -35,15 +43,15 @@ investigation · `Unknown` not yet started.
 
 ## Repository map
 
-- [`docs/hardware.md`](docs/hardware.md) — the coach control system, network,
+- [`docs/hardware.md`](docs/hardware.md): the coach control system, network,
   and any added hardware.
-- [`docs/integration.md`](docs/integration.md) — how Home Assistant talks to
+- [`docs/integration.md`](docs/integration.md): how Home Assistant talks to
   the trailer, and the entities exposed.
-- [`docs/discovery-log.md`](docs/discovery-log.md) — dated reverse-engineering
+- [`docs/discovery-log.md`](docs/discovery-log.md): dated reverse-engineering
   notes, dead ends included.
-- [`docs/references.md`](docs/references.md) — links to forums, OEM docs, and
+- [`docs/references.md`](docs/references.md): links to forums, OEM docs, and
   related projects.
-- [`homeassistant/`](homeassistant/) — publishable Home Assistant config.
+- [`homeassistant/`](homeassistant/): publishable Home Assistant config.
 
 ## License
 

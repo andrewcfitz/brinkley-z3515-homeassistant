@@ -6,31 +6,70 @@ actual rig.
 
 ## Coach control system
 
-- **System / brand:** _to be confirmed_
-- **Control panel model(s):** _to be confirmed_
-- **Smart-system app (if any):** _to be confirmed_
+- **System / brand:** Lippert (LCI) **OneControl**
+- **Control panel model(s):** OneControl touchscreen panel _(exact model to be confirmed on this rig)_
+- **Smart-system app (if any):** LCI OneControl / MyRV app
+- **Bus:** CAN bus. OneControl is an **RV-C** system (RV-C runs over CAN at
+  250 kbit/s). Treat the bitrate as _to be confirmed on this rig_ until verified
+  with the ESP32 or a logic analyzer.
 
-What it controls, and how (multiplexed wiring, relays, CAN/RV-C bus, etc.):
+What it controls: lighting, slides, awning, tanks, climate, leveling, and so on
+are managed over the OneControl CAN bus and surfaced on the touchscreen panel.
+The plan is to tap that same CAN bus read-only first, then decode it.
 
-> _Notes go here._
+### Reference: LCI MyRV WiFi Gateway
+
+Lippert sells a first-party gateway that hangs off the same CAN bus. It is a
+useful reference for how to physically tap in (connectors, termination, daisy
+chain), even though this project uses a custom ESP32 instead.
+
+- **Gateway:** Lippert WR1001NS, marketed as LCI MyRV WiFi Gateway, p/n 406343.
+- Source: [OpenRange owners forum thread](https://www.openrangeowners.com/threads/adding-lci-onecontrol-myrv-wifi-gateway.1103287/)
+  (see [references](references.md)).
 
 ## Network topology
 
-How control modules, any gateway, and Home Assistant connect (Wi-Fi, Ethernet,
-CAN bus, Bluetooth, Zigbee, etc.).
+CAN bus is a **daisy chain** with a terminating resistor at each end. The
+OneControl touchscreen sits on the bus with a terminator. To add a node (the
+gateway, or our ESP32), the approach documented in the forum thread:
 
-> _Diagram or notes go here._
+1. Unplug the CAN cable from the touchscreen.
+2. Run a new CAN cable from the new node to the touchscreen.
+3. Move the end terminating resistor from the touchscreen to the new node so
+   the chain stays terminated at both ends.
+
+```
+[ ... OneControl modules ... ]---[ ESP32-S3 node ]---[ touchscreen ]
+                                        |                    |
+                                  (new CAN cable)      (terminator moved
+                                                        here from panel)
+```
+
+> _Confirm the actual bus layout on the Z3515 before cutting into anything._
 
 ## Added hardware
 
-Sensors, relays, controllers, or bridges added beyond the factory system.
+Hardware bought to build the Home Assistant bridge.
 
-| Device | Purpose | Where wired | HA integration | Notes |
-|--------|---------|-------------|----------------|-------|
-|        |         |             |                |       |
+| Device | Purpose | Part number | Notes |
+|--------|---------|-------------|-------|
+| Waveshare ESP32-S3 RS485/CAN board | The bridge: reads OneControl CAN, talks to Home Assistant over WiFi | Waveshare ESP32-S3-RS485-CAN | [Amazon B0FNJX8VGZ](https://www.amazon.com/dp/B0FNJX8VGZ). Industrial board with isolated CAN and RS485, wide-voltage input. |
+| CAN bus cable | Connect ESP32 node into the OneControl CAN daisy chain | Molex **2451350220** (Mini-Fit Jr, 2 m) | Same cable used in the forum build. Lippert equivalents: #331111 (2 ft), #331114 (10 ft). |
+| Power connector (housing) | 12 V power tap for the node | TE / AMP Mate-N-Lok **1-480318-0** | |
+| Power connector pins | Crimp sockets for the power connector | TE **60619-4** | |
+
+### Still to buy or confirm
+
+- **CAN terminating resistor** — Lippert p/n **333041** (about $9). Needed if the
+  ESP32 is inserted at the end of the chain. First confirm whether the Waveshare
+  board has a switchable 120 ohm terminator on-board; if it does, that may cover
+  it.
+- **Power wire** — the forum build used 16/2 AWG tinned marine duplex, spliced
+  into the touchscreen's 12 V feed.
 
 ## Model and reference numbers
 
 - **Trailer:** 2026 Brinkley Z3515
-- **VIN:** _do not record here — public repo_
-- Other module / part numbers as identified.
+- **VIN:** _do not record here; this is a public repo._
+- Coach system: LCI OneControl (RV-C over CAN)
+- Bridge MCU: Waveshare ESP32-S3 (RS485 + CAN)
