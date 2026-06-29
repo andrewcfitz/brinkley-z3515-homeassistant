@@ -1,0 +1,16 @@
+# Home Assistant secrets — never commit these to a public repo
+secrets.yaml
+**/secrets.yaml
+*.secret
+.env
+.env.*
+*.key
+*.pem
+known_devices.yaml
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
