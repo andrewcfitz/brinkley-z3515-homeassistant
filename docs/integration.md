@@ -32,13 +32,41 @@ custom integration.
     near it. Do not reuse the OneControl CAN ESP32 for this; keep it dedicated to
     bus duty.
 
-## Add-on sensors and controls: Zigbee / Thread via SLZB-06 (available)
+## LP tanks: Mopeka Pro Check (BLE)
 
-**Status: Available, not yet populated.** A SMLIGHT **SLZB-06** network
-coordinator (CC2652P + ESP32-S3) gives Home Assistant a Zigbee and Thread radio
-over Ethernet / PoE / USB / WiFi. This is the channel for anything added beyond
-the factory systems: Zigbee tank sensors, temperature/humidity, contact and
-motion sensors, smart relays, etc.
+**Status: In progress (hardware on hand).** A **Mopeka Pro Check** ultrasonic
+propane level sensor magnet-mounts to the bottom of each LP tank and reports fill
+level, temperature, and battery over BLE.
+
+- **Transport:** BLE **advertisements** (broadcast), not a paired connection.
+  This matters: unlike the Power Watchdog, the Mopeka does not consume a single
+  connection, so HA and the phone app can both read it at once, and one receiver
+  can hear multiple sensors.
+- **Integration:** Home Assistant has a **built-in Mopeka integration** (BLE);
+  ESPHome also has a Mopeka component if reading via a proxy.
+- **BLE coverage:** rides the same BLE infrastructure as the Power Watchdog (Pi 4
+  onboard Bluetooth, or a Screek BP1 proxy). The LP tanks and the shore-power
+  inlet are in different parts of the rig, so a proxy near the propane
+  compartment may be needed even if the Pi covers the Power Watchdog. ESPHome
+  supports multiple BT proxies on one HA instance.
+- **Entities (per sensor):** tank level (%), reading distance, temperature,
+  battery.
+
+## Add-on sensors and controls: Zigbee via SLZB-06 + Zigbee2MQTT (in use)
+
+**Status: In progress.** A SMLIGHT **SLZB-06** network coordinator (CC2652P +
+ESP32-S3) gives Home Assistant a Zigbee radio over Ethernet / PoE / USB / WiFi,
+run through **Zigbee2MQTT**. This is the channel for anything added beyond the
+factory systems.
+
+**Devices on hand:**
+
+- **Baggage / basement bay doors:** SONOFF **SNZB-04PR2** Zigbee contact sensors
+  (4-pack). One per bay door; each exposes an open/closed `binary_sensor` plus
+  battery, and supports tamper detection. Use for "is a bay open" alerts and
+  travel-readiness checks.
+
+Notes:
 
 - **Integration:** **Zigbee2MQTT** (chosen over ZHA). Needs an MQTT broker;
   Mosquitto on the Pi 4 is the usual choice. The OneControl CAN bridge may also
@@ -92,6 +120,8 @@ Exact entity IDs depend on your HA naming; types and subsystem are fixed.
 | Frequency | sensor (Hz) | Shore power | ha-power-watchdog (BLE) | Confirmed |
 | Error code / description | sensor | Shore power | ha-power-watchdog (BLE) | Confirmed |
 | Fault Active | binary_sensor | Shore power | ha-power-watchdog (BLE) | Confirmed |
+| Tank level / temp / battery | sensor | LP tanks | Mopeka Pro Check (BLE) | In progress |
+| Bay door open/closed (per bay) | binary_sensor | Baggage doors | SONOFF SNZB-04PR2 (Zigbee2MQTT) | In progress |
 
 ## Setup
 
@@ -105,6 +135,27 @@ Exact entity IDs depend on your HA naming; types and subsystem are fixed.
 4. Restart Home Assistant.
 5. Close the official Power Watchdog phone app so the BLE connection is free.
 6. Add the integration; it auto-detects the model and creates the sensors above.
+
+### Mopeka Pro Check (LP tanks, BLE)
+
+1. Install the sensor: snap the magnetic mount to the bottom center of the LP
+   tank (steel tank required for the magnet).
+2. Ensure BLE coverage near the propane compartment (Pi 4 onboard BT or a Screek
+   BP1 proxy placed nearby).
+3. In HA, add the built-in **Mopeka** integration; it discovers the sensor's BLE
+   advertisements automatically. Pair/identify by pressing the sensor button.
+4. Set the tank type/size in the integration so level (%) reads correctly.
+5. Repeat per tank.
+
+### SONOFF SNZB-04PR2 bay door sensors (Zigbee2MQTT)
+
+1. Stand up an MQTT broker (Mosquitto) and Zigbee2MQTT against the SLZB-06, if
+   not already running.
+2. Put Zigbee2MQTT in permit-join, then pair each SNZB-04PR2 (press its pairing
+   button until the LED blinks).
+3. Mount sensor + magnet across each bay door seam so the gap closes when shut.
+4. Rename each device by bay in Zigbee2MQTT; the open/closed `binary_sensor` and
+   battery flow into HA over MQTT discovery.
 
 ### OneControl CAN bridge
 

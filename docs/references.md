@@ -21,13 +21,19 @@ Links worth keeping. Add as you find them.
 - CAN terminator: Lippert p/n 333041.
 - Hughes Autoformers Power Watchdog Gen II WiFi 30A surge protector:
   [product page](https://mobilemusthave.com/products/hughes-autoformers-power-watchdog-gen-ii-wifi-30a-smart-surge-protector).
+- SONOFF SNZB-04PR2 Zigbee contact sensors (bay doors, 4-pack):
+  [Amazon B0GKFB66JZ](https://www.amazon.com/dp/B0GKFB66JZ).
+- Mopeka Pro Check BLE propane level sensor (LP tanks):
+  [Amazon B09J6MXJKT](https://www.amazon.com/dp/B09J6MXJKT).
 
 ## Home Assistant
 
 - [`jdaleo23/ha-power-watchdog`](https://github.com/jdaleo23/ha-power-watchdog):
   HACS integration for the Hughes Power Watchdog over BLE. **In use.**
+- [Mopeka integration](https://www.home-assistant.io/integrations/mopeka/):
+  built-in HA integration for Mopeka BLE tank sensors.
 - [ESPHome](https://esphome.io/): candidate firmware for the ESP32 CAN bridge
-  (has CAN bus support) and for a Bluetooth proxy for the Power Watchdog.
+  (has CAN bus support) and for Bluetooth proxies (Power Watchdog, Mopeka).
 - HA host: Raspberry Pi 4.
 
 ## Radios and hubs

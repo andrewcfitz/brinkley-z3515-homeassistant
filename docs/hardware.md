@@ -67,7 +67,8 @@ gateway, or our ESP32), the approach documented in the forum thread:
 
 ## Added hardware
 
-Hardware bought to build the Home Assistant bridge.
+Hardware bought for the Home Assistant integration: the CAN bridge plus add-on
+sensors.
 
 | Device | Purpose | Part number | Notes |
 |--------|---------|-------------|-------|
@@ -76,6 +77,8 @@ Hardware bought to build the Home Assistant bridge.
 | Power connector (housing) | 12 V power tap for the node | TE / AMP Mate-N-Lok **1-480318-0** | |
 | Power connector pins | Crimp sockets for the power connector | TE **60619-4** | |
 | Hughes Power Watchdog Gen II WiFi 30A | Shore-power surge protection + monitoring (already integrated into HA) | Hughes Autoformers Power Watchdog Gen II 30A | Talks to HA over BLE via the `ha-power-watchdog` integration. See [integration](integration.md). |
+| Bay door contact sensors | Open/closed sensing on basement / baggage bay doors | SONOFF **SNZB-04PR2** (Zigbee, 4-pack) | Via Zigbee2MQTT through the SLZB-06. One per bay door. [Amazon B0GKFB66JZ](https://www.amazon.com/dp/B0GKFB66JZ). |
+| LP tank level sensors | Propane fill level, temp, battery | **Mopeka Pro Check** (BLE, ultrasonic) | Magnetic mount on steel tank bottom; BLE advertisements read by HA's Mopeka integration. [Amazon B09J6MXJKT](https://www.amazon.com/dp/B09J6MXJKT). |
 
 ### Still to buy or confirm
 

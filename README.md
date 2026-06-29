@@ -36,6 +36,8 @@ Tracking how far each subsystem has gotten toward Home Assistant integration.
 | Subsystem            | Status      | Notes |
 |----------------------|-------------|-------|
 | Shore power monitor  | Confirmed   | Hughes Power Watchdog Gen II 30A over BLE (`ha-power-watchdog`) |
+| LP / propane tanks   | In progress | Mopeka Pro Check over BLE (HA Mopeka integration); hardware on hand |
+| Baggage bay doors    | In progress | SONOFF SNZB-04PR2 Zigbee contact sensors via Zigbee2MQTT; hardware on hand |
 | Fresh water tank     | Unknown     | Target via OneControl CAN bridge |
 | Grey water tank      | Unknown     | Target via OneControl CAN bridge |
 | Black water tank     | Unknown     | Target via OneControl CAN bridge |

@@ -4,6 +4,24 @@ Dated, append-only notes on reverse-engineering the Z3515. Newest entries on
 top. Dead ends are kept on purpose: a failed approach and the reason it failed
 is as useful as a success.
 
+## 2026-06-29: First add-on sensors bought (bay doors + LP tanks)
+
+Two add-on sensor sets in hand, both riding existing channels:
+
+- **Baggage / basement bay doors:** SONOFF **SNZB-04PR2** Zigbee contact sensors
+  (4-pack). First real Zigbee devices; go through the SLZB-06 + Zigbee2MQTT.
+- **LP tanks:** **Mopeka Pro Check** BLE ultrasonic level sensors. Read by HA's
+  built-in Mopeka integration over BLE advertisements (broadcast, so no
+  one-connection limit like the Power Watchdog has).
+
+BLE coverage note: the LP compartment and the shore-power inlet are in different
+spots, so a Screek BP1 proxy near the propane tanks may be needed even if the
+Pi covers the Power Watchdog. ESPHome allows multiple BT proxies.
+
+Both are `In progress` (bought, not yet installed/configured). Next: stand up
+Mosquitto + Zigbee2MQTT for the door sensors, and the HA Mopeka integration for
+the tanks.
+
 ## 2026-06-29: BT proxy on hand (Screek BP1) + Zigbee2MQTT chosen
 
 Resolved the unidentified eBay device: it is a **Screek BP1**, an ESP32 running
