@@ -79,6 +79,7 @@ sensors.
 | Hughes Power Watchdog Gen II WiFi 30A | Shore-power surge protection + monitoring (already integrated into HA) | Hughes Autoformers Power Watchdog Gen II 30A | Talks to HA over BLE via the `ha-power-watchdog` integration. See [integration](integration.md). |
 | Bay door contact sensors | Open/closed sensing on basement / baggage bay doors | SONOFF **SNZB-04PR2** (Zigbee, 4-pack) | Via Zigbee2MQTT through the SLZB-06. One per bay door. [Amazon B0GKFB66JZ](https://www.amazon.com/dp/B0GKFB66JZ). |
 | LP tank level sensors | Propane fill level, temp, battery | **Mopeka Pro Check** (BLE, ultrasonic) | Magnetic mount on steel tank bottom; BLE advertisements read by HA's Mopeka integration. [Amazon B09J6MXJKT](https://www.amazon.com/dp/B09J6MXJKT). |
+| Temp / humidity meters | Climate logging, indoor + outdoor | **SwitchBot IP65 Hygrometer Thermometer** (BLE, 3-pack) | Reused from old RV. IP65 (one can go outside). Read by HA's SwitchBot Bluetooth integration. [Amazon B0BVZC9Q31](https://www.amazon.com/dp/B0BVZC9Q31). |
 
 ### Still to buy or confirm
 

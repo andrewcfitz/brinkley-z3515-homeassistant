@@ -4,6 +4,19 @@ Dated, append-only notes on reverse-engineering the Z3515. Newest entries on
 top. Dead ends are kept on purpose: a failed approach and the reason it failed
 is as useful as a success.
 
+## 2026-06-29: SwitchBot temp/humidity meters (reused from old RV)
+
+Carried over **SwitchBot IP65 Indoor/Outdoor Hygrometer Thermometers** (3-pack)
+from the previous RV. BLE temperature + humidity, IP65 so one can go outside.
+Read by HA's built-in SwitchBot Bluetooth integration over BLE advertisements
+(broadcast, no single-connection limit). Rides the same BLE infrastructure as the
+Power Watchdog and Mopeka; the Screek BP1 proxy explicitly supports SwitchBot.
+
+`In progress` until placed and added to HA. Notable: the BLE device count is
+growing (Power Watchdog + Mopeka + 3 SwitchBot), spread across the rig. Plan BT
+proxy placement so every zone has coverage rather than assuming one radio reaches
+all of them.
+
 ## 2026-06-29: First add-on sensors bought (bay doors + LP tanks)
 
 Two add-on sensor sets in hand, both riding existing channels:

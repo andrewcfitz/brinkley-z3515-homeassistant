@@ -25,6 +25,8 @@ Links worth keeping. Add as you find them.
   [Amazon B0GKFB66JZ](https://www.amazon.com/dp/B0GKFB66JZ).
 - Mopeka Pro Check BLE propane level sensor (LP tanks):
   [Amazon B09J6MXJKT](https://www.amazon.com/dp/B09J6MXJKT).
+- SwitchBot IP65 Indoor/Outdoor Hygrometer Thermometer (temp/humidity, 3-pack,
+  reused from old RV): [Amazon B0BVZC9Q31](https://www.amazon.com/dp/B0BVZC9Q31).
 
 ## Home Assistant
 
@@ -32,8 +34,11 @@ Links worth keeping. Add as you find them.
   HACS integration for the Hughes Power Watchdog over BLE. **In use.**
 - [Mopeka integration](https://www.home-assistant.io/integrations/mopeka/):
   built-in HA integration for Mopeka BLE tank sensors.
+- [SwitchBot integration](https://www.home-assistant.io/integrations/switchbot/):
+  built-in HA integration for SwitchBot BLE devices (meters, etc.).
 - [ESPHome](https://esphome.io/): candidate firmware for the ESP32 CAN bridge
-  (has CAN bus support) and for Bluetooth proxies (Power Watchdog, Mopeka).
+  (has CAN bus support) and for Bluetooth proxies (Power Watchdog, Mopeka,
+  SwitchBot).
 - HA host: Raspberry Pi 4.
 
 ## Radios and hubs

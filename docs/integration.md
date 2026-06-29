@@ -52,6 +52,26 @@ level, temperature, and battery over BLE.
 - **Entities (per sensor):** tank level (%), reading distance, temperature,
   battery.
 
+## Temperature & humidity: SwitchBot meters (BLE)
+
+**Status: In progress (hardware on hand, reused from a previous RV).** SwitchBot
+**IP65 Indoor/Outdoor Hygrometer Thermometers** (3-pack) report temperature and
+humidity over BLE. IP65 rated, so one can live outside; the others cover interior
+zones (living area, basement, fridge/freezer, etc.).
+
+- **Transport:** BLE **advertisements** (broadcast), like the Mopeka. No
+  single-connection limit; HA and the SwitchBot app can both read them.
+- **Integration:** Home Assistant's **built-in SwitchBot Bluetooth integration**
+  reads the meters; ESPHome also has a SwitchBot meter component. The Screek BP1
+  proxy explicitly lists SwitchBot support.
+- **BLE coverage:** same infrastructure as the other BLE devices (Pi 4 onboard
+  Bluetooth and/or Screek BP1 proxies). The outdoor unit especially may want a
+  proxy near it.
+- **Entities (per sensor):** temperature, humidity, battery. Derived values
+  (dewpoint, etc.) can be computed in HA.
+- **Use for:** climate logging, freeze warnings, and humidity automations
+  independent of the OneControl HVAC control path.
+
 ## Add-on sensors and controls: Zigbee via SLZB-06 + Zigbee2MQTT (in use)
 
 **Status: In progress.** A SMLIGHT **SLZB-06** network coordinator (CC2652P +
@@ -122,6 +142,7 @@ Exact entity IDs depend on your HA naming; types and subsystem are fixed.
 | Fault Active | binary_sensor | Shore power | ha-power-watchdog (BLE) | Confirmed |
 | Tank level / temp / battery | sensor | LP tanks | Mopeka Pro Check (BLE) | In progress |
 | Bay door open/closed (per bay) | binary_sensor | Baggage doors | SONOFF SNZB-04PR2 (Zigbee2MQTT) | In progress |
+| Temperature / humidity / battery | sensor | Climate logging | SwitchBot meter (BLE) | In progress |
 
 ## Setup
 
@@ -156,6 +177,15 @@ Exact entity IDs depend on your HA naming; types and subsystem are fixed.
 3. Mount sensor + magnet across each bay door seam so the gap closes when shut.
 4. Rename each device by bay in Zigbee2MQTT; the open/closed `binary_sensor` and
    battery flow into HA over MQTT discovery.
+
+### SwitchBot meters (temperature/humidity, BLE)
+
+1. Ensure BLE coverage where each meter will sit (Pi 4 onboard BT or a Screek BP1
+   proxy; the outdoor unit especially may need a nearby proxy).
+2. In HA, add the built-in **SwitchBot** integration; meters are discovered from
+   their BLE advertisements.
+3. Name each by location (outside, living area, fridge, etc.).
+4. Repeat per meter.
 
 ### OneControl CAN bridge
 
