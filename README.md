@@ -14,11 +14,20 @@ log of what is still being reverse-engineered.
 
 ## Approach
 
-The Z3515 runs **Lippert (LCI) OneControl**, an **RV-C over CAN** system. The
-plan is to tap the CAN bus with a **Waveshare ESP32-S3 RS485/CAN** board and
-bridge decoded values to Home Assistant over WiFi. Details in
-[`docs/integration.md`](docs/integration.md) and [`docs/hardware.md`](docs/hardware.md);
-running notes in [`docs/discovery-log.md`](docs/discovery-log.md).
+Home Assistant runs on a **Raspberry Pi 4** and reaches the trailer through three
+channels:
+
+1. **Shore power** over BLE: a Hughes Power Watchdog Gen II via `ha-power-watchdog`.
+   Working today.
+2. **Coach systems** over CAN: the Z3515 runs **Lippert (LCI) OneControl**
+   (**RV-C over CAN**); a **Waveshare ESP32-S3 RS485/CAN** board taps the bus and
+   bridges to HA. In progress.
+3. **Add-on sensors and controls** over Zigbee/Thread: a SMLIGHT **SLZB-06**
+   network coordinator. Available for anything the factory systems do not cover.
+
+Details in [`docs/integration.md`](docs/integration.md) and
+[`docs/hardware.md`](docs/hardware.md); running notes in
+[`docs/discovery-log.md`](docs/discovery-log.md).
 
 ## Status at a glance
 

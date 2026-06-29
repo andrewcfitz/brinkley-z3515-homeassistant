@@ -4,6 +4,25 @@ What is physically in and on the trailer, and how it is wired. Fill in as
 each piece is identified. Do not record anything as fact until verified on the
 actual rig.
 
+## Home Assistant host and radios
+
+- **HA host:** Raspberry Pi 4 running Home Assistant. Hub for everything below.
+  Has onboard 2.4 GHz WiFi and Bluetooth, plus Ethernet.
+- **Zigbee / Thread coordinator:** SMLIGHT **SLZB-06** (CC2652P radio + ESP32-S3).
+  Network coordinator over Ethernet / PoE / USB / WiFi. Lets HA run Zigbee
+  (ZHA or Zigbee2MQTT) and Thread/Matter without a USB stick on the Pi, and lets
+  the radio sit centrally instead of next to the Pi. This is the path for any
+  added Zigbee/Thread sensors and relays.
+- **Bluetooth for the Power Watchdog:** start with the Pi 4's onboard BLE. If the
+  surge protector (likely in an outside bay or at the pedestal) is out of range,
+  add a separate ESP32 ESPHome Bluetooth proxy near it.
+
+The result is three integration channels into one HA instance:
+
+1. **Shore power** over BLE (Power Watchdog): working.
+2. **Coach systems** over CAN (OneControl via ESP32 bridge): in progress.
+3. **Add-on sensors/controls** over Zigbee/Thread (via SLZB-06): available.
+
 ## Coach control system
 
 - **System / brand:** Lippert (LCI) **OneControl**

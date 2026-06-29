@@ -4,6 +4,23 @@ Dated, append-only notes on reverse-engineering the Z3515. Newest entries on
 top. Dead ends are kept on purpose: a failed approach and the reason it failed
 is as useful as a success.
 
+## 2026-06-29: Hub inventory (Pi 4 + SLZB-06)
+
+Pinned down the hub side. **Home Assistant runs on a Raspberry Pi 4.** A SMLIGHT
+**SLZB-06** (CC2652P + ESP32-S3) is on hand as a network Zigbee/Thread/Matter
+coordinator over Ethernet/PoE/USB/WiFi.
+
+This settles the architecture into three channels feeding one HA instance:
+
+1. Shore power over BLE (Power Watchdog), working.
+2. Coach systems over CAN (OneControl via ESP32 bridge), in progress.
+3. Add-on sensors/controls over Zigbee/Thread (SLZB-06), available.
+
+The Pi 4's onboard Bluetooth is the first thing to try for the Power Watchdog;
+fall back to a dedicated ESP32 BT proxy only if range is bad.
+
+(One more device, an eBay listing, is still to be identified and added.)
+
 ## 2026-06-29: First integration confirmed (Hughes Power Watchdog)
 
 Shore-power monitoring is **working in Home Assistant**. The Hughes Autoformers

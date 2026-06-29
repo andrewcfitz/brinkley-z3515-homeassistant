@@ -4,6 +4,9 @@ How Home Assistant talks to the Z3515. This is the "what works" half of the
 repo. Update the README status table whenever an entry here moves to
 `Confirmed`.
 
+**HA host:** Raspberry Pi 4. See [hardware](hardware.md) for the full host and
+radio inventory.
+
 This rig has more than one integration. Each is tracked separately below.
 
 ## Shore power: Hughes Power Watchdog (working)
@@ -23,9 +26,25 @@ custom integration.
 - **Gotchas:**
   - The device allows only **one BLE connection at a time**. Close the official
     Power Watchdog phone app or HA cannot connect.
-  - BLE range is short. An **ESPHome Bluetooth proxy** is recommended for a
-    stable link. Note: the OneControl CAN ESP32 is busy with bus duty, so a
-    separate cheap ESP32 BT proxy is the cleaner option.
+  - BLE source: start with the **Pi 4's onboard Bluetooth**. If the surge
+    protector is out of range (likely if it lives in an outside bay or at the
+    pedestal), add a separate **ESP32 ESPHome Bluetooth proxy** near it. Do not
+    reuse the OneControl CAN ESP32 for this; keep it dedicated to bus duty.
+
+## Add-on sensors and controls: Zigbee / Thread via SLZB-06 (available)
+
+**Status: Available, not yet populated.** A SMLIGHT **SLZB-06** network
+coordinator (CC2652P + ESP32-S3) gives Home Assistant a Zigbee and Thread radio
+over Ethernet / PoE / USB / WiFi. This is the channel for anything added beyond
+the factory systems: Zigbee tank sensors, temperature/humidity, contact and
+motion sensors, smart relays, etc.
+
+- **Integration:** ZHA or Zigbee2MQTT, or the official SMLIGHT integration.
+  Auto-detected by HA on the network.
+- **Why network-attached:** the radio can sit centrally in the rig instead of
+  next to the Pi, improving mesh coverage; PoE means one cable for data + power.
+- **Use it for:** subsystems the OneControl CAN bridge cannot reach or that are
+  simpler to add as standalone sensors.
 
 ## Coach systems: OneControl CAN bus via ESP32 bridge (in progress)
 

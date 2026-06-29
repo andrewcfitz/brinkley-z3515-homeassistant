@@ -28,6 +28,13 @@ Links worth keeping. Add as you find them.
   HACS integration for the Hughes Power Watchdog over BLE. **In use.**
 - [ESPHome](https://esphome.io/): candidate firmware for the ESP32 CAN bridge
   (has CAN bus support) and for a Bluetooth proxy for the Power Watchdog.
+- HA host: Raspberry Pi 4.
+
+## Radios and hubs
+
+- [SMLIGHT SLZB-06](https://smlight.tech/global/slzb06): network Zigbee/Thread/Matter
+  coordinator (CC2652P + ESP32-S3), Ethernet/PoE/USB/WiFi. Works with ZHA,
+  Zigbee2MQTT, or the SMLIGHT HA integration. **On hand.**
 
 ## Forums and other owners
 
