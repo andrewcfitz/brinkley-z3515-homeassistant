@@ -9,13 +9,12 @@ actual rig.
 - **HA host:** Raspberry Pi 4 running Home Assistant. Hub for everything below.
   Has onboard 2.4 GHz WiFi and Bluetooth, plus Ethernet.
 - **Zigbee / Thread coordinator:** SMLIGHT **SLZB-06** (CC2652P radio + ESP32-S3).
-  Network coordinator over Ethernet / PoE / USB / WiFi. Lets HA run Zigbee
-  (ZHA or Zigbee2MQTT) and Thread/Matter without a USB stick on the Pi, and lets
-  the radio sit centrally instead of next to the Pi. This is the path for any
-  added Zigbee/Thread sensors and relays.
-- **Bluetooth for the Power Watchdog:** start with the Pi 4's onboard BLE. If the
-  surge protector (likely in an outside bay or at the pedestal) is out of range,
-  add a separate ESP32 ESPHome Bluetooth proxy near it.
+  Network coordinator over Ethernet / PoE / USB / WiFi. Runs via **Zigbee2MQTT**
+  (chosen over ZHA), and can sit centrally instead of next to the Pi. This is the
+  path for any added Zigbee/Thread sensors and relays.
+- **Bluetooth proxy:** Screek **BP1** (ESP32 running ESPHome, USB-C powered, ~$15).
+  An ESPHome Bluetooth proxy to give the Power Watchdog a stable BLE link when the
+  Pi 4's onboard Bluetooth is out of range. Place it near the surge protector.
 
 The result is three integration channels into one HA instance:
 
@@ -86,9 +85,9 @@ Hardware bought to build the Home Assistant bridge.
   it.
 - **Power wire:** the forum build used 16/2 AWG tinned marine duplex, spliced
   into the touchscreen's 12 V feed.
-- **Bluetooth proxy (likely):** a separate cheap ESP32 running ESPHome as a BT
-  proxy, to give the Power Watchdog a stable BLE link to HA. The CAN-bridge
-  ESP32 is occupied with bus duty, so keep these as separate devices.
+
+(The Bluetooth proxy for the Power Watchdog is already on hand: a Screek BP1.
+See the host and radios section above.)
 
 ## Model and reference numbers
 

@@ -17,13 +17,13 @@ log of what is still being reverse-engineered.
 Home Assistant runs on a **Raspberry Pi 4** and reaches the trailer through three
 channels:
 
-1. **Shore power** over BLE: a Hughes Power Watchdog Gen II via `ha-power-watchdog`.
-   Working today.
+1. **Shore power** over BLE: a Hughes Power Watchdog Gen II via `ha-power-watchdog`,
+   with a Screek BP1 ESPHome Bluetooth proxy for range. Working today.
 2. **Coach systems** over CAN: the Z3515 runs **Lippert (LCI) OneControl**
    (**RV-C over CAN**); a **Waveshare ESP32-S3 RS485/CAN** board taps the bus and
    bridges to HA. In progress.
-3. **Add-on sensors and controls** over Zigbee/Thread: a SMLIGHT **SLZB-06**
-   network coordinator. Available for anything the factory systems do not cover.
+3. **Add-on sensors and controls** over Zigbee: a SMLIGHT **SLZB-06** coordinator
+   run through **Zigbee2MQTT**, for anything the factory systems do not cover.
 
 Details in [`docs/integration.md`](docs/integration.md) and
 [`docs/hardware.md`](docs/hardware.md); running notes in

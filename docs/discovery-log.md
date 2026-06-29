@@ -4,6 +4,20 @@ Dated, append-only notes on reverse-engineering the Z3515. Newest entries on
 top. Dead ends are kept on purpose: a failed approach and the reason it failed
 is as useful as a success.
 
+## 2026-06-29: BT proxy on hand (Screek BP1) + Zigbee2MQTT chosen
+
+Resolved the unidentified eBay device: it is a **Screek BP1**, an ESP32 running
+ESPHome as a **Bluetooth proxy** (~$15, USB-C). That covers the Power Watchdog
+BLE range concern without a new purchase. Plan: try the Pi 4's onboard Bluetooth
+first; if the surge protector is out of range, run the BP1 near it.
+
+Also decided: Zigbee runs through **Zigbee2MQTT** (not ZHA). This needs an MQTT
+broker (Mosquitto on the Pi). Bonus: if the OneControl CAN bridge also publishes
+over MQTT, a single broker serves both, which keeps the topology simple.
+
+Hardware inventory is now complete for the planned channels. Next real work:
+bench the Waveshare ESP32 and sniff the OneControl CAN bus read-only.
+
 ## 2026-06-29: Hub inventory (Pi 4 + SLZB-06)
 
 Pinned down the hub side. **Home Assistant runs on a Raspberry Pi 4.** A SMLIGHT

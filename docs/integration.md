@@ -28,8 +28,9 @@ custom integration.
     Power Watchdog phone app or HA cannot connect.
   - BLE source: start with the **Pi 4's onboard Bluetooth**. If the surge
     protector is out of range (likely if it lives in an outside bay or at the
-    pedestal), add a separate **ESP32 ESPHome Bluetooth proxy** near it. Do not
-    reuse the OneControl CAN ESP32 for this; keep it dedicated to bus duty.
+    pedestal), use the **Screek BP1** ESPHome Bluetooth proxy (on hand) placed
+    near it. Do not reuse the OneControl CAN ESP32 for this; keep it dedicated to
+    bus duty.
 
 ## Add-on sensors and controls: Zigbee / Thread via SLZB-06 (available)
 
@@ -39,8 +40,9 @@ over Ethernet / PoE / USB / WiFi. This is the channel for anything added beyond
 the factory systems: Zigbee tank sensors, temperature/humidity, contact and
 motion sensors, smart relays, etc.
 
-- **Integration:** ZHA or Zigbee2MQTT, or the official SMLIGHT integration.
-  Auto-detected by HA on the network.
+- **Integration:** **Zigbee2MQTT** (chosen over ZHA). Needs an MQTT broker;
+  Mosquitto on the Pi 4 is the usual choice. The OneControl CAN bridge may also
+  publish over MQTT, so one broker can serve both.
 - **Why network-attached:** the radio can sit centrally in the rig instead of
   next to the Pi, improving mesh coverage; PoE means one cable for data + power.
 - **Use it for:** subsystems the OneControl CAN bridge cannot reach or that are

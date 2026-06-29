@@ -33,8 +33,12 @@ Links worth keeping. Add as you find them.
 ## Radios and hubs
 
 - [SMLIGHT SLZB-06](https://smlight.tech/global/slzb06): network Zigbee/Thread/Matter
-  coordinator (CC2652P + ESP32-S3), Ethernet/PoE/USB/WiFi. Works with ZHA,
-  Zigbee2MQTT, or the SMLIGHT HA integration. **On hand.**
+  coordinator (CC2652P + ESP32-S3), Ethernet/PoE/USB/WiFi. Run via **Zigbee2MQTT**.
+  **On hand.**
+- [Screek BP1](https://shop.screek.io/products/bp1): ESP32 + ESPHome Bluetooth
+  proxy, USB-C powered. Extends BLE range for the Power Watchdog. **On hand.**
+- [Zigbee2MQTT](https://www.zigbee2mqtt.io/): chosen Zigbee stack (needs an MQTT
+  broker such as Mosquitto).
 
 ## Forums and other owners
 
