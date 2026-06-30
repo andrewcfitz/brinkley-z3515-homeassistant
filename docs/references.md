@@ -12,6 +12,9 @@ Links worth keeping. Add as you find them.
 - RV-C protocol: open standard for RV CAN networks (DGNs, instances, 250 kbit/s).
   Specification at <https://www.rv-c.com/>.
 - Lippert MyRV WiFi Gateway: first-party CAN gateway, WR1001NS / p/n 406343.
+- [LibreCoach](https://librecoach.com/): open-source, Home-Assistant-based RV-C
+  control/monitoring that auto-detects RV-C devices and pulls them into HA, fully
+  local. Strong candidate to replace custom OneControl decode work. **Evaluate.**
 
 ## Hardware
 

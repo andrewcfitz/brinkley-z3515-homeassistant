@@ -21,7 +21,8 @@ channels:
    with a Screek BP1 ESPHome Bluetooth proxy for range. Working today.
 2. **Coach systems** over CAN: the Z3515 runs **Lippert (LCI) OneControl**
    (**RV-C over CAN**); a **Waveshare ESP32-S3 RS485/CAN** board taps the bus and
-   bridges to HA. In progress.
+   bridges to HA. In progress. Evaluating [LibreCoach](https://librecoach.com/),
+   an open-source HA + RV-C project, which may handle this off the shelf.
 3. **Add-on sensors and controls** over Zigbee: a SMLIGHT **SLZB-06** coordinator
    run through **Zigbee2MQTT**, for anything the factory systems do not cover.
 

@@ -123,6 +123,21 @@ Planned phases:
 RV-C handling) vs. custom firmware publishing over MQTT. Tradeoffs to be noted
 here.
 
+### Evaluate first: LibreCoach (off-the-shelf RV-C + HA)
+
+[LibreCoach](https://librecoach.com/) is an open-source project built on Home
+Assistant that **auto-detects RV-C network devices and brings them into HA** with
+no manual configuration: lights, shades, locks, pumps, tank levels, battery
+voltage, temperatures. Local, no cloud. This could replace most of the custom
+decode work above, so evaluate it **before** writing bespoke firmware.
+
+Key open question: **how does LibreCoach get onto the CAN bus?** It most likely
+expects a CAN interface the HA host can read (a USB-CAN adapter or CAN HAT on the
+Pi 4, or a network-published CAN stream). Need to confirm whether it can consume
+the Waveshare ESP32 bridge's feed, or whether a different CAN tap (wired to the
+Pi) fits its model better. That answer may change the hardware plan. See
+[hardware](hardware.md) and the [discovery log](discovery-log.md).
+
 > Update the README status table as each subsystem moves from `Unknown` to
 > `In progress` to `Confirmed`.
 

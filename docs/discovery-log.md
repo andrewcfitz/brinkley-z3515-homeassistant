@@ -4,6 +4,19 @@ Dated, append-only notes on reverse-engineering the Z3515. Newest entries on
 top. Dead ends are kept on purpose: a failed approach and the reason it failed
 is as useful as a success.
 
+## 2026-06-30: Found LibreCoach (possible off-the-shelf RV-C integration)
+
+[LibreCoach](https://librecoach.com/) is an open-source, Home-Assistant-based
+project that auto-detects RV-C devices and surfaces them in HA (lights, shades,
+locks, pumps, tank levels, battery, temps), fully local. This could do most of
+the OneControl integration without custom ESP32 RV-C decoding.
+
+Action: **evaluate LibreCoach before committing to bespoke firmware.** Key
+unknown is how it taps CAN: does it want a wired CAN interface on the Pi 4 (USB-CAN
+or CAN HAT), or can it ingest the Waveshare ESP32 bridge's feed over the network?
+That answer may reshape the hardware plan (the ESP32 may not be the right tap if
+LibreCoach expects local CAN on the host). Has GitHub / Discord; dig into docs.
+
 ## 2026-06-29: SwitchBot temp/humidity meters (reused from old RV)
 
 Carried over **SwitchBot IP65 Indoor/Outdoor Hygrometer Thermometers** (3-pack)
